@@ -1,8 +1,12 @@
 require('dotenv').config();
 const express = require('express');
+const searchService = require('./services/searchService');
 
 const app = express();
 
-app.get('/', (req, res) => res.send('Hello world'));
+app.get('/api/items', async (req, res) => {
+  const response = await searchService.getSearch('hola');
+  res.json(response);
+});
 
 module.exports = app;
