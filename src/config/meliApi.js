@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 const meliApiInstance = axios.create({
-  baseURL: 'https://api.mercadolibre.com/sites/MLA',
+  baseURL: process.env.MELI_API_BASE_URL,
   timeout: 1000
 });
 
