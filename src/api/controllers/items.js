@@ -1,5 +1,6 @@
 const searchService = require('../../services/searchService');
 const itemsService = require('../../services/itemsService');
+const infoParser = require('../../utils/infoParser');
 
 exports.getSearch = async (req, res) => {
   const response = await searchService.getItemsSearch(req.query.q);
@@ -7,10 +8,7 @@ exports.getSearch = async (req, res) => {
 };
 
 exports.getItem = async (req, res) => {
-  const response1 = await itemsService.getItem(req.params.id);
-  const response2 = await itemsService.getItemDescription(req.params.id);
-  res.json({
-    item: response1,
-    itemDescription: response2
-  });
+  const item = await itemsService.getItem(req.params.id);
+  const description = await itemsService.getItemDescription(req.params.id);
+  res.json(infoParser.normalizeItem(item, description));
 };
