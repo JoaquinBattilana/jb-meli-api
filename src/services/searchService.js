@@ -1,6 +1,6 @@
 const meliApiInstance = require('../config/meliApi');
 
-exports.getSearch = async searchText => {
+exports.getItemsSearch = async searchText => {
   const response = await meliApiInstance.get('/search', {
     params: {
       q: searchText
