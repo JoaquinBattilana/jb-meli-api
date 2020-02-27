@@ -3,8 +3,8 @@ const itemsService = require('../../services/itemsService');
 const infoParser = require('../../utils/infoParser');
 
 exports.getSearch = async (req, res) => {
-  const response = await searchService.getItemsSearch(req.query.q);
-  res.json(response);
+  const itemsSearch = await searchService.getItemsSearch(req.query.q);
+  res.json(infoParser.normalizeSearchItems(itemsSearch));
 };
 
 exports.getItem = async (req, res) => {
