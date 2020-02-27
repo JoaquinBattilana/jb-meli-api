@@ -8,3 +8,13 @@ exports.getItemsSearch = async searchText => {
   });
   return response.data.results;
 };
+
+exports.getItem = async id => {
+  const response = await meliApiInstance.get(`/search/${id}`);
+  return response.data;
+};
+
+exports.getItemDescription = async id => {
+  const response = await meliApiInstance.get(`/search/${id}/description`);
+  return response.data;
+};
