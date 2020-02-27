@@ -1,12 +1,8 @@
 require('dotenv').config();
 const express = require('express');
-const searchService = require('./services/searchService');
 
 const app = express();
 
-app.get('/api/items', async (req, res) => {
-  const response = await searchService.getSearch('hola');
-  res.json(response);
-});
+app.use('/api/items', require('./api/routes/items'));
 
 module.exports = app;
