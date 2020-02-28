@@ -3,6 +3,6 @@ const express = require('express');
 
 const app = express();
 
-app.get('/', (req, res) => res.send('Hello world'));
+app.use('/api/items', require('./api/routes/items'));
 
 module.exports = app;
