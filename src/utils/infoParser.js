@@ -14,7 +14,7 @@ exports.normalizeItem = item => ({
     amount: Math.floor(item.price),
     decimals: getDecimals(item.price)
   },
-  picture: item.pictures && item.pictures[0].url,
+  picture: item.thumbnail,
   condition: item.condition,
   free_shipping: item.shipping && item.shipping.free_shipping
 });
