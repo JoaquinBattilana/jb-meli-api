@@ -23,14 +23,20 @@ exports.getSearch = async (req, res) => {
 
 exports.getItem = async (req, res) => {
   try {
-    const item = await itemsService.getItem(req.params.id);
-    const description = await itemsService.getItemDescription(req.params.id);
-    const category = await categoriesService.getItemCategory(req.params.id);
+    const responses = await Promise.all(
+      [
+        itemsService.getItem(req.params.id),
+        itemsService.getItemDescription(req.params.id)
+      ]
+    );
+    const item = responses[0];
+    const description = responses[1];
+    const category = await categoriesService.getItemCategory(item.category_id);
     const itemInfo = infoParser.normalizeItem(item);
     res.json({
       item: {
         ...itemInfo,
-        category: infoParser.getCategoryRoot(category),
+        categories: infoParser.getCategoryRoot(category),
         soldQuantity: item.sold_quantity,
         description: description.text_plain,
       }
