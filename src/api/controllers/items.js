@@ -22,7 +22,26 @@ exports.getSearch = async (req, res) => {
 };
 
 exports.getItem = async (req, res) => {
-  const item = await itemsService.getItem(req.params.id);
-  const description = await itemsService.getItemDescription(req.params.id);
-  res.json(infoParser.normalizeItem(item, description));
+  try {
+    const responses = await Promise.all(
+      [
+        itemsService.getItem(req.params.id),
+        itemsService.getItemDescription(req.params.id)
+      ]
+    );
+    const item = responses[0];
+    const description = responses[1];
+    const category = await categoriesService.getItemCategory(item.category_id);
+    const itemInfo = infoParser.normalizeItem(item);
+    res.json({
+      item: {
+        ...itemInfo,
+        categories: infoParser.getCategoryRoot(category),
+        soldQuantity: item.sold_quantity,
+        description: description.text_plain,
+      }
+    });
+  } catch (e) {
+    res.status(404).json({ message: e.message });
+  }
 };

@@ -10,14 +10,12 @@ exports.normalizeItem = item => ({
   },
   picture: item.thumbnail,
   condition: item.condition,
-  free_shipping: item.shipping && item.shipping.free_shipping
+  freeShipping: item.shipping && item.shipping.free_shipping
 });
 
-exports.normalizeSearchItems = items => ({
-  items: items && items.map(
-    item => this.normalizeItem(item)
-  )
-});
+exports.normalizeSearchItems = items => items && items.map(
+  item => this.normalizeItem(item)
+);
 
 exports.findCategoryFilter = filters => filters && filters.find(filter => filter.id === 'category');
 
