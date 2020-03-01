@@ -1,11 +1,5 @@
 const getDecimals = number => Number(number.toString().split('.')[1]);
 
-const normalizeCategories = filters => {
-  const category = filters && filters.find(filter => filter.id === 'category');
-  const categories = category && category.values[0].path_from_root.map(cat => cat.name);
-  return categories;
-};
-
 exports.normalizeItem = item => ({
   id: item.id,
   title: item.title,
@@ -19,9 +13,28 @@ exports.normalizeItem = item => ({
   free_shipping: item.shipping && item.shipping.free_shipping
 });
 
-exports.normalizeSearchItems = searchResults => ({
-  categories: normalizeCategories(searchResults.filters),
-  items: searchResults && searchResults.results.map(
+exports.normalizeSearchItems = items => ({
+  items: items && items.map(
     item => this.normalizeItem(item)
   )
 });
+
+exports.findCategoryFilter = filters => filters && filters.find(filter => filter.id === 'category');
+
+exports.getCategoryRoot = category => category 
+  && category.path_from_root
+  && category.path_from_root.map(cat => cat.name);
+
+exports.findCategoriesInFilters = filters => {
+  const categoryFilter = this.findCategoryFilter(filters);
+  const category = categoryFilter && categoryFilter.values[0];
+  return this.getCategoryRoot(category);
+};
+
+exports.findCategoryIdInAvailableFilters = availableFilters => {
+  const categories = this.findCategoryFilter(availableFilters);
+  if (!categories) return null;
+  return categories.values.reduce((acumulator, category) =>
+    (category.results > acumulator.results ? category : acumulator),
+  categories.values[0]);
+};
