@@ -16,6 +16,8 @@ module.exports = {
   },
   rules: {
     'comma-dangle': "off",
-    "arrow-parens": ["error", "as-needed"]
+    "arrow-parens": ["error", "as-needed"],
+    "implicit-arrow-linebreak": "off",
+    "no-trailing-spaces": "off"
   },
 };

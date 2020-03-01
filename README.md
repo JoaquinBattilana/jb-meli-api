@@ -4,3 +4,4 @@ eslint seleccionado
 express
 nodemon
 dotenv
+categorias
