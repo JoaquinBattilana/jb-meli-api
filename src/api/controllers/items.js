@@ -22,7 +22,20 @@ exports.getSearch = async (req, res) => {
 };
 
 exports.getItem = async (req, res) => {
-  const item = await itemsService.getItem(req.params.id);
-  const description = await itemsService.getItemDescription(req.params.id);
-  res.json(infoParser.normalizeItem(item, description));
+  try {
+    const item = await itemsService.getItem(req.params.id);
+    const description = await itemsService.getItemDescription(req.params.id);
+    const category = await categoriesService.getItemCategory(req.params.id);
+    const itemInfo = infoParser.normalizeItem(item);
+    res.json({
+      item: {
+        ...itemInfo,
+        category: infoParser.getCategoryRoot(category),
+        soldQuantity: item.sold_quantity,
+        description: description.text_plain,
+      }
+    });
+  } catch (e) {
+    res.status(404).json({ message: e.message });
+  }
 };

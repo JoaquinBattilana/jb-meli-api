@@ -10,7 +10,7 @@ exports.normalizeItem = item => ({
   },
   picture: item.thumbnail,
   condition: item.condition,
-  free_shipping: item.shipping && item.shipping.free_shipping
+  freeShipping: item.shipping && item.shipping.free_shipping
 });
 
 exports.normalizeSearchItems = items => ({
