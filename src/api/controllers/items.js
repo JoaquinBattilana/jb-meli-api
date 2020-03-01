@@ -38,7 +38,7 @@ exports.getItem = async (req, res) => {
         ...itemInfo,
         categories: infoParser.getCategoryRoot(category),
         soldQuantity: item.sold_quantity,
-        description: description.text_plain,
+        description: description.plain_text,
       }
     });
   } catch (e) {
