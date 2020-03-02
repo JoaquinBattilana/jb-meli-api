@@ -43,6 +43,48 @@ npm start
 ```
 Ya tenemos la api corriendo y escuchando en el puerto que definimos!.
 
+## Endpoints
+
+### **Busqueda**
+
+  Retorna un json con los items que matchean la busqueda indicada
+
+* **URL**
+  /items
+* **Method:**
+  `GET`
+*  **URL Params**
+   `q=[string]`
+
+* **Data Params**
+  None
+ 
+* **Ejemplo:**
+
+  ```bash
+    curl -X GET https://jb-meli-api.herokuapp.com/api/items?q=:query
+  ```
+  
+### **Item**
+
+  Retorna un json con los datos del objeto indicado
+
+* **URL**
+  /items/:id
+* **Method:**
+  `GET`
+*  **URL Params**
+   None
+
+* **Data Params**
+  `id=[string]`
+ 
+* **Ejemplo:**
+
+  ```bash
+    curl -X GET https://jb-meli-api.herokuapp.com/api/items/${id}
+  ```
+
 # Decisiones del proyecto
 
 ### Framework
