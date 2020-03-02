@@ -18,7 +18,7 @@ exports.normalizeItem = item => ({
 });
 
 exports.normalizeSearchItems = items => items && items.map(
-  item => this.normalizeItem(item)
+  item => ({ ...this.normalizeItem(item), state: item.address.state_name })
 );
 
 exports.findCategoryFilter = filters => filters && filters.find(filter => filter.id === 'category');
