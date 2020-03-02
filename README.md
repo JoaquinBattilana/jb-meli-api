@@ -28,12 +28,16 @@ Dentro del .env vamos a definir las variables de entorno de nuestra API que pued
 PORT = puerto que se ejecutara el servidor
 MELI_API_BASE_URL = url base de la api de mercadolibre para nuestros requests
 SEARCH_QUANTITY = cantidad de respuestas que queremos pedir a la api de mercadolibre al solicitar items
+AUTHOR_NAME = nombre del autor para devolver la firma en la request
+AUTHOR_SURNAME = apellido del autor para devolver la firma en la request
 ```
 Un ejemplo( este es el que actualmente se va a usar para el ejercicio) podría ser:
 ```code
 PORT = 3005
 MELI_API_BASE_URL = https://api.mercadolibre.com
 SEARCH_QUANTITY = 4
+AUTHOR_NAME = Joaquin
+AUTHOR_SURNAME = Battilana
 ```
 
 Una vez definamos el .env guardamos, instalamos las dependencias y ejecutamos el servidor:
