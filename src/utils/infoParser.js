@@ -1,5 +1,9 @@
 const getDecimals = number => Number(number.toString().split('.')[1]);
 
+const getPicture = item => (item.pictures && item.pictures[0] 
+  ? item.pictures[0].secure_url || item.pictures[0].url 
+  : item.secure_thumbnail || item.thumbnail);
+
 exports.normalizeItem = item => ({
   id: item.id,
   title: item.title,
@@ -8,7 +12,7 @@ exports.normalizeItem = item => ({
     amount: Math.floor(item.price),
     decimals: getDecimals(item.price)
   },
-  picture: item.thumbnail,
+  picture: getPicture(item),
   condition: item.condition,
   freeShipping: item.shipping && item.shipping.free_shipping
 });
