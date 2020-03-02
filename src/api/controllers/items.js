@@ -12,7 +12,7 @@ exports.getSearch = async (req, res) => {
       categories = await categoriesService.getItemCategory(categories.id);
       categories = infoParser.getCategoryRoot(categories);
     }
-    res.json({
+    res.jsonWithAuthor({
       items: infoParser.normalizeSearchItems(itemsSearch.results),
       categories
     });
@@ -33,7 +33,7 @@ exports.getItem = async (req, res) => {
     const description = responses[1];
     const category = await categoriesService.getItemCategory(item.category_id);
     const itemInfo = infoParser.normalizeItem(item);
-    res.json({
+    res.jsonWithAuthor({
       item: {
         ...itemInfo,
         categories: infoParser.getCategoryRoot(category),
