@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const compression = require('compression');
 
 const corsOptions = {
   origin: '*',
@@ -9,6 +10,7 @@ const corsOptions = {
 
 const app = express();
 
+app.use(compression());
 app.use(cors(corsOptions));
 app.use('/api/items', require('./api/routes/items'));
 
